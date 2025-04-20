@@ -52,6 +52,7 @@ php artisan migrate --seed
 
 # 6. Buat storage link agar file dapat diakses publik
 php artisan storage:link
+```
 
 
 ## 👉 Cara Menggunakan Aplikasi
@@ -89,4 +90,3 @@ Di sisi kiri sidebar, terdapat tombol dropdown unit kerja. Ketika diklik, Anda b
 ### Penjelasan:
 
 Admin dapat menambahkan unit kerja di dalam unit kerja sebanyak yang diperlukan, dan di setiap unit kerja terdapat jabatan untuk user. Ketika jabatan diklik, pegawai dengan unit kerja dan jabatan terkait akan ditampilkan.
-```
