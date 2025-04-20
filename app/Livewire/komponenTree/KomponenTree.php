@@ -19,7 +19,7 @@ class KomponenTree extends Component
     }
 
 
-
+    // method untuk simpan unit kerja
     public function simpanUnit($parentId)
     {
         UnitKerja::create([
@@ -30,6 +30,7 @@ class KomponenTree extends Component
         $this->namaUnitBaru = '';
     }
 
+    // method untuk simpan jabatan
     public function simpanJabatan($unitId)
     {
         Jabatan::create([
@@ -48,7 +49,7 @@ class KomponenTree extends Component
         return view('livewire.komponen-tree.komponen-tree', compact('tree'));
     }
 
-    // Fungsi rekursif
+    // fungsi untuk membuat tree
     public function buildTree($items, $parentId = 0)
     {
         $branch = [];

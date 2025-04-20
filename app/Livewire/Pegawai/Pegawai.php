@@ -20,13 +20,12 @@ class Pegawai extends Component
 {
 
     use WithFileUploads;
-    public $jabatan, $title, $link, $jabatan_nama, $pegawai_id, $nip, $nama, $tempat_lahir, $alamat, $tgl_lahir, $jenis_kelamin, $golongan_id, $eselon_id, $jabatan_id, $tempat_tugas, $agama_id, $no_hp, $npwp, $foto;
-    public $modal = false;
-    public $selectJabatan = false;
-    public $unitKerjas, $unitKerja_id, $golongans, $eselons, $jabatans, $agamas;
+
+    // variable untuk menampung data yang di perlukan
+    public $pegawai_id, $nip, $nama, $tempat_lahir, $alamat, $tgl_lahir, $jenis_kelamin, $golongan_id, $eselon_id, $jabatan_id, $tempat_tugas, $agama_id, $no_hp, $npwp, $foto, $link, $modal = false, $selectJabatan = false, $unitKerja_id, $unitKerjas, $golongans, $eselons, $jabatans, $agamas = [];
 
 
-
+    // deklarasi variable untuk pertama kali di load
     public function mount()
     {
         $this->unitKerjas = unitKerja::with('parent')->get();
@@ -38,12 +37,14 @@ class Pegawai extends Component
     }
 
 
+    // method untuk menampilkan modal
     public function showCreate()
     {
         $this->link = "store";
         $this->modal = true;
     }
 
+    // method untuk reset form
     public function resetForm()
     {
         $this->nip = '';
@@ -63,12 +64,14 @@ class Pegawai extends Component
         $this->foto = null;
     }
 
+    // method untuk menutup modal
     public function close()
     {
         $this->modal = false;
         $this->resetForm();
     }
 
+    // validasi setiap variale
     protected $rules = [
         'nip' => 'required|integer',
         'nama' => 'required|string|max:255',
@@ -87,14 +90,11 @@ class Pegawai extends Component
         'foto' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg',
     ];
 
-
-
-
-
-
+    // fungsi untuk menyimpan data
     public function store()
     {
         try {
+            // validasi data sesuai dengan rules
             $this->validate();
             // dd($this->all());
             $pegawai = new ModelsPegawai();
@@ -114,6 +114,7 @@ class Pegawai extends Component
             $pegawai->no_hp = $this->no_hp;
             $pegawai->npwp = $this->npwp;
 
+            // jika ada file foto, simpan di folder public/storage/fotoPegawai
             if ($this->foto) {
                 $imageName = time() . '.' . $this->foto->extension();
                 $path = $this->foto->storeAs('fotoPegawai', $imageName, 'public');
@@ -122,10 +123,11 @@ class Pegawai extends Component
 
             $pegawai->save();
 
+            // mengosongkan form
             $this->resetForm();
             session()->flash('success', 'Pegawai berhasil dibuat.');
 
-
+            // tutup modal
             $this->modal = false;
         } catch (\Exception $e) {
             Log::error('Error creating pegawai: ' . $e->getMessage());
@@ -134,6 +136,7 @@ class Pegawai extends Component
     }
 
 
+    // method untuk mengubah data jabatan ketika unit kerja di pilih
     public function changeUnitKerja()
     {
         $this->jabatans = jabatan::where('unit_kerja_id', $this->unitKerja_id)->get();
@@ -142,7 +145,7 @@ class Pegawai extends Component
 
 
 
-
+    // method untuk menampilkan modal beserta memberikan value pada form
     public function showEdit($id)
     {
         $pegawai = ModelsPegawai::find($id);
@@ -166,8 +169,11 @@ class Pegawai extends Component
         $this->modal = true;
     }
 
+
+    // method untuk update data
     public function update()
     {
+        $this->validate();
         $pegawai = ModelsPegawai::find($this->pegawai_id);
         $pegawai->nip = $this->nip;
         $pegawai->nama = $this->nama;
@@ -184,6 +190,7 @@ class Pegawai extends Component
         $pegawai->no_hp = $this->no_hp;
         $pegawai->npwp = $this->npwp;
 
+        // jika ada file foto, simpan di folder public/storage/fotoPegawaim dan jika sebelumnya terdapat foto, hapus foto sebelumnnya
         if ($pegawai->foto && file_exists(public_path('storage/fotoPegawai/' . $pegawai->foto))) {
             unlink(public_path('storage/fotoPegawai/' . $pegawai->foto));
         }
@@ -195,33 +202,39 @@ class Pegawai extends Component
 
         $pegawai->save();
 
+        // mengosongkan form
         $this->resetForm();
+
+        // tutup modal
         $this->modal = false;
         session()->flash('success', 'Pegawai berhasil diubah.');
     }
 
+    // method untuk menghapus data
     public function delete($id)
     {
         $pegawai = ModelsPegawai::find($id);
+        // jika ada file foto, hapus file di folder public/storage/fotoPegawaim
         unlink(public_path('storage/fotoPegawai/' . $pegawai->foto));
         $pegawai->delete();
         session()->flash('success', 'Pegawai berhasil dihapus.');
     }
 
 
-
+    // method untuk mencetak data karyawan
     public function print()
     {
         $pegawais = ModelsPegawai::with(['golongan', 'eselon', 'jabatan', 'agama', 'unitKerja'])->get();
         return view('print.print-pegawai', compact('pegawais'));
     }
 
-
+    // method untuk export data karyawan ke excel
     public function exportExcel()
     {
         return Excel::download(new pegawaisExport(), 'pegawai.xlsx');
     }
 
+    // method untuk menampilkan view
     public function render()
     {
 
@@ -229,6 +242,7 @@ class Pegawai extends Component
         return view(
             'livewire.pegawai.pegawai',
             [
+                // data pegawai di tempatkan di sini supaya ter render ulang jika terjadi perubahan
                 'pegawais' => ModelsPegawai::with('golongan', 'eselon', 'jabatan', 'agama', 'unitKerja')->get(),
             ]
         );

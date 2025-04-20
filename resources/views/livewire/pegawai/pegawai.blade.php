@@ -1,5 +1,4 @@
 <div>
-
     @if ($modal)
         @include('livewire.pegawai.pegawai-modal')
     @else
@@ -102,7 +101,7 @@
                                         <td>{{ $pegawai->jabatan->jabatan }}</td>
                                         <td>{{ $pegawai->tempat_tugas }}</td>
                                         <td>{{ $pegawai->agama->agama }}</td>
-                                        <td>{{ $pegawai->unit_kerja->nama ?? '-' }}</td>
+                                        <td>{{ $pegawai->unitKerja->nama ?? '-' }}</td>
                                         <td>{{ $pegawai->no_hp }}</td>
                                         <td>{{ $pegawai->npwp }}</td>
                                         <td>

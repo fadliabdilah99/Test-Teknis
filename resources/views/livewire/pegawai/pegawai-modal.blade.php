@@ -15,12 +15,12 @@
                             </div>
                         </div>
                     </div>
-                            @if (session()->has('error'))
-                                <div class="alert alert-danger">
-                                    {{ session('error') }}
-                                </div>
-                            @endif
-                            
+                    @if (session()->has('error'))
+                        <div class="alert alert-danger">
+                            {{ session('error') }}
+                        </div>
+                    @endif
+
                     <div class="card-body">
                         <form wire:submit.prevent="{{ $link }}" method="POST">
                             @if ($errors->any())
@@ -109,6 +109,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="unitKerja">Unit Kerja</label>
+                                        {{-- ketika unit kerja di pilih akan request data jabatan sesuai dengan relasi unit kerja yang di pilih --}}
                                         <select required id="unitKerja" wire:change="changeUnitKerja"
                                             wire:model="unitKerja_id" class="form-control select2">
                                             <option value="" selected>Pilih Unit Kerja</option>
@@ -130,8 +131,10 @@
 
                                 <div class="col-md-6">
                                     <div class="form-group">
+                                        {{-- jika jabatan belum di pilih akan di disable --}}
                                         <label>{{ $selectJabatan == true ? 'Jabatan' : 'Pilih Unit Kerja terlebih dahulu' }}</label>
-                                        <select {{ $selectJabatan == true ? '' : 'disabled' }} required id="jabatan" wire:model="jabatan_id" class="form-control">
+                                        <select {{ $selectJabatan == true ? '' : 'disabled' }} required id="jabatan"
+                                            wire:model="jabatan_id" class="form-control">
                                             <option selected>
                                                 Jabatan
                                             </option>

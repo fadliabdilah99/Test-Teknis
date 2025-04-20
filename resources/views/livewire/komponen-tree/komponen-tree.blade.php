@@ -15,6 +15,7 @@
                 </div>
             </div>
 
+            {{-- menampilkan unit kerja pertama --}}
             @foreach ($unitKerjas->where('parent_id', null) as $unit)
                 @include('livewire.komponen-tree.unitkerja', ['unit' => $unit])
             @endforeach

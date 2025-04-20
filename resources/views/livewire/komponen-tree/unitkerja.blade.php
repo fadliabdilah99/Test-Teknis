@@ -31,9 +31,11 @@
                     Jabatan</button>
             </div>
 
+            {{-- menampilkan unit kerja jika masih terdapat turunan selanjutnya --}}
             @foreach ($unit->children as $child)
                 @include('livewire.komponen-tree.unitkerja', ['unit' => $child])
             @endforeach
+            {{-- menampilkan jabatan yang terdapat dalam unit kerja tertentu --}}
             @foreach ($unit->jabatans as $jabatan)
                 <li class="nav-item">
                     <a href="{{ route('unitkerja.detail', $jabatan->id) }}" class="nav-link {{ request()->is('unitkerja/pegawai/*') }}" wire:navigate>
