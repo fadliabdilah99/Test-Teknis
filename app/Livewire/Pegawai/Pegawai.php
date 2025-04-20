@@ -216,7 +216,9 @@ class Pegawai extends Component
     {
         $pegawai = ModelsPegawai::find($id);
         // jika ada file foto, hapus file di folder public/storage/fotoPegawaim
-        unlink(public_path('storage/fotoPegawai/' . $pegawai->foto));
+        if ($pegawai->foto && file_exists(public_path('storage/fotoPegawai/' . $pegawai->foto))){
+            unlink(public_path('storage/fotoPegawai/' . $pegawai->foto));
+        }
         $pegawai->delete();
         session()->flash('success', 'Pegawai berhasil dihapus.');
     }
