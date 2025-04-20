@@ -84,8 +84,8 @@ Di sisi kiri sidebar, terdapat tombol dropdown unit kerja. Ketika diklik, Anda b
     - *Kepala Biro Umum*
 
 **Catatan:**
-- `-` = Unit Kerja
-- `*` = Jabatan
+- **.** = Unit Kerja
+- *.* = Jabatan
 
 ### Penjelasan:
 
