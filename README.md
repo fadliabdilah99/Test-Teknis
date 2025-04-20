@@ -75,17 +75,17 @@ Pada halaman ini, Anda akan disuguhkan data pegawai secara keseluruhan dengan be
 
 Di sisi kiri sidebar, terdapat tombol dropdown unit kerja. Ketika diklik, Anda bisa menambahkan unit kerja maupun jabatan secara fleksibel. Contoh struktur unit kerja dan jabatan:
 
-- **Disnaker**
-  - **Sekretariat**
+- Disnaker
+  - Sekretariat
     - Sekretariat Provinsi
     - Sekretariat Kabupaten
-    - *Sekretaris Pusat*
-  - **Bidang Pelatihan**
-    - *Kepala Biro Umum*
+    * Sekretaris Pusat
+  - Bidang Pelatihan
+    * Kepala Biro Umum
 
 **Catatan:**
-- **.** = Unit Kerja
-- *.* = Jabatan
+    - = Unit Kerja
+    * = Jabatan
 
 ### Penjelasan:
 
