@@ -77,8 +77,8 @@ Di sisi kiri sidebar, terdapat tombol dropdown unit kerja. Ketika diklik, Anda b
 
 - Disnaker
   - Sekretariat
-    - Sekretariat Provinsi
-    - Sekretariat Kabupaten
+        - Sekretariat Provinsi
+        - Sekretariat Kabupaten
     * Sekretaris Pusat
   - Bidang Pelatihan
     * Kepala Biro Umum
