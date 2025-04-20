@@ -79,9 +79,9 @@ Di sisi kiri sidebar, terdapat tombol dropdown unit kerja. Ketika diklik, Anda b
   - Sekretariat
     - Sekretariat Provinsi
     - Sekretariat Kabupaten
-    - *Sekretaris Pusat*
+     *Sekretaris Pusat*
   - Bidang Pelatihan
-    - *Kepala Biro Umum*
+     *Kepala Biro Umum*
 
 ### Penjelasan:
 
