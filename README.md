@@ -54,34 +54,34 @@ php artisan migrate --seed
 php artisan storage:link
 ```
 
-
 ## 👉 Cara Menggunakan Aplikasi
 
 ### 1. Login
 
-- Buka browser dan akses [http://localhost:8000](http://localhost:8000)
-- Masukkan username dan password yang telah disediakan:
-  - **Username:** `admin@admin.com`
-  - **Password:** `password`
+-   Buka browser dan akses [http://localhost:8000](http://localhost:8000)
+-   Masukkan username dan password yang telah disediakan:
+    -   **Username:** `admin@admin.com`
+    -   **Password:** `password`
 
 ### 2. Halaman Pegawai
 
 Pada halaman ini, Anda akan disuguhkan data pegawai secara keseluruhan dengan beberapa fitur:
-- CRUD pegawai
-- Export Excel
-- Print Data
+
+-   CRUD pegawai
+-   Export Excel
+-   Print Data
 
 ### 3. Komponen Tree
 
 Di sisi kiri sidebar, terdapat tombol dropdown unit kerja. Ketika diklik, Anda bisa menambahkan unit kerja maupun jabatan secara fleksibel. Contoh struktur unit kerja dan jabatan:
 
-- Disnaker
-  - Sekretariat
-    - Sekretariat Provinsi
-    - Sekretariat Kabupaten
-     *Sekretaris Pusat*
-  - Bidang Pelatihan
-     *Kepala Biro Umum*
+-   **Disnaker**
+    -   **Sekretariat** (Unit Kerja Bagian dari Disnaker)
+        -   **Sekretariat Provinsi** (Unit Kerja Bagian dari Sekretaris)
+        -   **Sekretariat Kabupaten** (Unit Kerja Bagian dari Sekretaris)
+        -   _Sekretaris Pusat_ (Jabatan)
+    -   **Bidang Pelatihan** (Unit Kerja Bagian dari Disnaker)
+        -   _Kepala Biro Umum_ (Jabatan)
 
 ### Penjelasan:
 
