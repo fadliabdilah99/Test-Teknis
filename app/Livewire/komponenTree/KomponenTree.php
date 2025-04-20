@@ -8,15 +8,11 @@ use Livewire\Component;
 
 class KomponenTree extends Component
 {
-    public $unitKerjas;
     public $formMode = null; // 'unit' atau 'jabatan'
     public $parentId = null;
     public $namaUnitBaru, $namaJabatanBaru;
 
-    public function mount()
-    {
-        $this->unitKerjas = unitKerja::with('jabatans')->get();
-    }
+    public function mount() {}
 
 
     // method untuk simpan unit kerja
@@ -45,8 +41,9 @@ class KomponenTree extends Component
 
     public function render()
     {
-        $tree = $this->buildTree($this->unitKerjas);
-        return view('livewire.komponen-tree.komponen-tree', compact('tree'));
+        $unitKerjas = unitKerja::with('jabatans')->get();
+        $tree = $this->buildTree($unitKerjas);
+        return view('livewire.komponen-tree.komponen-tree', compact('tree', 'unitKerjas'));
     }
 
     // fungsi untuk membuat tree
