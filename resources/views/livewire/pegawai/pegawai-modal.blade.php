@@ -114,8 +114,9 @@
                                             wire:model="unitKerja_id" class="form-control select2">
                                             <option value="" selected>Pilih Unit Kerja</option>
                                             @foreach ($unitKerjas as $unitKerja)
+                                                {{-- menampilkan struktur unit kerja sampai turunan bernilai null --}}
                                                 <option value="{{ $unitKerja->id }}">
-                                                    {{ $unitKerja->id }}
+                                                    {{ $unitKerja->nama }}
                                                     @php
                                                         $parent = $unitKerja->parent;
                                                         while ($parent) {

@@ -173,6 +173,7 @@ class Pegawai extends Component
     // method untuk update data
     public function update()
     {
+        // dd($this->all());
         $this->validate();
         $pegawai = ModelsPegawai::find($this->pegawai_id);
         $pegawai->nip = $this->nip;
@@ -186,7 +187,7 @@ class Pegawai extends Component
         $pegawai->jabatan_id = $this->jabatan_id;
         $pegawai->tempat_tugas = $this->tempat_tugas;
         $pegawai->agama_id = $this->agama_id;
-        $pegawai->unit_kerja_id = $this->unit_kerja_id;
+        $pegawai->unit_kerja_id = $this->unitKerja_id;
         $pegawai->no_hp = $this->no_hp;
         $pegawai->npwp = $this->npwp;
 
