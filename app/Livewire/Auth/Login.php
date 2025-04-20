@@ -25,7 +25,7 @@ class Login extends Component
             'password' => $this->password
         ])) {
             session()->regenerate();
-            return redirect()->route('dashboard');
+            return redirect()->route('pegawai');
         }
 
         session()->flash('error', 'Email atau password salah.');

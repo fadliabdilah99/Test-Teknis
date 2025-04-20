@@ -15,6 +15,12 @@
                             </div>
                         </div>
                     </div>
+                            @if (session()->has('error'))
+                                <div class="alert alert-danger">
+                                    {{ session('error') }}
+                                </div>
+                            @endif
+                            
                     <div class="card-body">
                         <form wire:submit.prevent="{{ $link }}" method="POST">
                             @if ($errors->any())
@@ -80,7 +86,7 @@
                                     <div class="form-group">
                                         <label>Golongan</label>
                                         <select required id="golongan" wire:model="golongan_id" class="form-control">
-                                            <option selected >Golongan</option>
+                                            <option selected>Golongan</option>
                                             @foreach ($golongans as $golongan)
                                                 <option value="{{ $golongan->id }}">{{ $golongan->gol }}
                                                 </option>
@@ -102,18 +108,38 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label>Jabatan (combobox)</label>
-                                        <input type="text" class="form-control" placeholder="Cari Jabatan"
-                                            list="jabatan-list" wire:model="jabatan_nama">
-                                        <datalist id="jabatan-list">
-                                            @foreach ($jabatans as $jabatan)
-                                                <option value="{{ $jabatan->jabatan }}">{{$jabatan->unitKerja->nama}}</option>
+                                        <label for="unitKerja">Unit Kerja</label>
+                                        <select required id="unitKerja" wire:change="changeUnitKerja"
+                                            wire:model="unitKerja_id" class="form-control select2">
+                                            <option value="" selected>Pilih Unit Kerja</option>
+                                            @foreach ($unitKerjas as $unitKerja)
+                                                <option value="{{ $unitKerja->id }}">
+                                                    {{ $unitKerja->id }}
+                                                    @php
+                                                        $parent = $unitKerja->parent;
+                                                        while ($parent) {
+                                                            echo ' - ' . $parent->nama;
+                                                            $parent = $parent->parent;
+                                                        }
+                                                    @endphp
+                                                </option>
                                             @endforeach
-                                        </datalist>
+                                        </select>
+                                    </div>
+                                </div>
 
-                                        @if ($jabatan_id)
-                                            <small class="text-success">ID Jabatan: {{ $jabatan_id }}</small>
-                                        @endif
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>{{ $selectJabatan == true ? 'Jabatan' : 'Pilih Unit Kerja terlebih dahulu' }}</label>
+                                        <select {{ $selectJabatan == true ? '' : 'disabled' }} required id="jabatan" wire:model="jabatan_id" class="form-control">
+                                            <option selected>
+                                                Jabatan
+                                            </option>
+                                            @foreach ($jabatans as $jabatan)
+                                                <option value="{{ $jabatan->id }}">{{ $jabatan->jabatan }}
+                                                </option>
+                                            @endforeach
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -151,10 +177,10 @@
                                             class="form-control" />
                                     </div>
                                 </div>
-                                <div class="col-md-6 pe-0">
+                                <div class="col-md-12 pe-0">
                                     <div class="form-group">
                                         <label>Foto</label>
-                                        <input type="file" id="foto" wire:model="foto"
+                                        <input type="file" id="foto" wire:model="foto" accept="image/*"
                                             class="form-control" />
                                         @if ($foto)
                                             <img src="{{ asset('storage/fotoPegawai/' . $foto) }}" alt="Preview"

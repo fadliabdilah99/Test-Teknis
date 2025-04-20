@@ -1,66 +1,92 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# 📦 Laravel Livewire Project
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Proyek ini merupakan pencatatan PNS dengan berbagai fitur, di antaranya:
 
-## About Laravel
+-   Pendataan PNS
+-   Upload foto
+-   Pengelompokan unit kerja
+-   Menampilkan pegawai berdasarkan unit kerja dan jabatan
+-   Export data ke Excel
+-   Print data
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+---
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## 🧰 Fitur
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+-   🔄 Komponen dinamis menggunakan Livewire
+-   📥 Export data ke file Excel (menggunakan Laravel Excel)
+-   📂 Upload dan akses file dengan `storage:link`
+-   🌱 Seeder untuk generate data awal ke database
 
-## Learning Laravel
+---
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## ⚙️ Requirements
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+-   PHP >= 8.0
+-   Composer
+-   MySQL / MariaDB
+-   Laravel CLI
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+---
 
-## Laravel Sponsors
+## 🚀 Instalasi
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+Langkah-langkah untuk setup project:
 
-### Premium Partners
+```bash
+# 1. Clone repositori
+git clone https://github.com/fadliabdilah99/Test-Teknis.git
+cd Test-Teknis
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+# 2. Install dependency PHP
+composer install
 
-## Contributing
+# 3. Salin file .env
+cp .env.example .env
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+# 4. Generate app key
+php artisan key:generate
 
-## Code of Conduct
+# 5. Setup database (atur konfigurasi DB di file .env)
+php artisan migrate --seed
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+# 6. Buat storage link agar file dapat diakses publik
+php artisan storage:link
 
-## Security Vulnerabilities
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+## 👉 Cara Menggunakan Aplikasi
 
-## License
+### 1. Login
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+- Buka browser dan akses [http://localhost:8000](http://localhost:8000)
+- Masukkan username dan password yang telah disediakan:
+  - **Username:** `admin@admin.com`
+  - **Password:** `password`
+
+### 2. Halaman Pegawai
+
+Pada halaman ini, Anda akan disuguhkan data pegawai secara keseluruhan dengan beberapa fitur:
+- CRUD pegawai
+- Export Excel
+- Print Data
+
+### 3. Komponen Tree
+
+Di sisi kiri sidebar, terdapat tombol dropdown unit kerja. Ketika diklik, Anda bisa menambahkan unit kerja maupun jabatan secara fleksibel. Contoh struktur unit kerja dan jabatan:
+
+- **Disnaker**
+  - **Sekretariat**
+    - Sekretariat Provinsi
+    - Sekretariat Kabupaten
+    - *Sekretaris Pusat*
+  - **Bidang Pelatihan**
+    - *Kepala Biro Umum*
+
+**Catatan:**
+- `-` = Unit Kerja
+- `*` = Jabatan
+
+### Penjelasan:
+
+Admin dapat menambahkan unit kerja di dalam unit kerja sebanyak yang diperlukan, dan di setiap unit kerja terdapat jabatan untuk user. Ketika jabatan diklik, pegawai dengan unit kerja dan jabatan terkait akan ditampilkan.
+```
