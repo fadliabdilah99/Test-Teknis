@@ -52,6 +52,9 @@ php artisan migrate --seed
 
 # 6. Buat storage link agar file dapat diakses publik
 php artisan storage:link
+
+# 7. Jalankan Aplikasi
+php artisan serve
 ```
 
 ## 👉 Cara Menggunakan Aplikasi
